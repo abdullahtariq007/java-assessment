@@ -10,7 +10,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.util.Arrays;
 import java.util.Enumeration;
 
@@ -35,7 +35,7 @@ public class LoggingHandler {
         if (null != request) {
             log.info("Start Header Section of request ");
             log.info("Method Type : " + request.getMethod());
-            Enumeration headerNames = request.getHeaderNames();
+            Enumeration<String> headerNames = request.getHeaderNames();
             while (headerNames.hasMoreElements()) {
                 String headerName = String.valueOf(headerNames.nextElement());
                 String headerValue = request.getHeader(headerName);
@@ -46,30 +46,9 @@ public class LoggingHandler {
         }
     }
 
-//    @Around("controller()")
-//    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-//
-//        long start = System.currentTimeMillis();
-//        try {
-//            String className = joinPoint.getSignature().getDeclaringTypeName();
-//            String methodName = joinPoint.getSignature().getName();
-//            Object result = joinPoint.proceed();
-//            long elapsedTime = System.currentTimeMillis() - start;
-//            log.debug("Method " + className + "." + methodName + " ()" + " execution time : "
-//                    + elapsedTime + " ms");
-//
-//            return result;
-//        } catch (IllegalArgumentException e) {
-//            log.error("Illegal argument " + Arrays.toString(joinPoint.getArgs()) + " in "
-//                    + joinPoint.getSignature().getName() + "()");
-//            throw e;
-//        }
-//    }
-//
+
     @AfterReturning(pointcut ="controller()", returning = "result")
     public void logAfter(JoinPoint joinPoint, Object result) {
-//        Object result = new Object();
-//        HttpServletResponse result =
         String returnValue = this.getValue(result);
         log.info("Method Return value : " + returnValue);
     }

@@ -17,11 +17,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
     MerchantRepository merchantRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Merchant merchant = merchantRepository.findByEmailAddress(username);
-        if(!Objects.isNull(merchant)){
-        return new User(merchant.getEmailAddress(),merchant.getPassword(),new ArrayList<>());
+        if (!Objects.isNull(merchant)) {
+            return new User(merchant.getEmailAddress(), merchant.getPassword(), new ArrayList<>());
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
