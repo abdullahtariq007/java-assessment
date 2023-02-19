@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,4 +29,7 @@ public class Merchant {
     private String licenseNumber;
     private String emailAddress;
     private boolean verified = false;
+    private String password;
+    @Version
+    private Long version;
 }

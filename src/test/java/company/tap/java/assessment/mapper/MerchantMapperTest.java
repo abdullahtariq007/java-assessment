@@ -1,7 +1,7 @@
 package company.tap.java.assessment.mapper;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import company.tap.java.assessment.dto.MerchantDto;
 import company.tap.java.assessment.model.Merchant;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,15 +18,21 @@ class MerchantMapperTest  {
         merchant.setEmailAddress("testemail@test.email");
         merchant.setIdentificationNumber("TestIdentificationNumber");
         merchant.setLicenseNumber("Merchant Sample license number");
-//        merchant.setOtpVerified(true);
-
         MerchantDto merchantDto = merchantMapper.convertToDto(merchant);
         Assert.assertEquals(merchantDto.getEmailAddress(),merchant.getEmailAddress());
         Assert.assertEquals(merchantDto.getIdentificationNumber(),merchant.getIdentificationNumber());
         Assert.assertEquals(merchantDto.getLicenseNumber(),merchant.getLicenseNumber());
     }
 
-//    @Test
-//    void convertToEntity() {
-//    }
+    @Test
+    void convertToEntity() {
+        MerchantDto merchantDto = new MerchantDto();
+        merchantDto.setEmailAddress("testemail@test.email");
+        merchantDto.setLicenseNumber("test license number");
+        merchantDto.setIdentificationNumber("123456 id number");
+        Merchant merchant = merchantMapper.convertToEntity(merchantDto);
+        Assert.assertEquals(merchant.getEmailAddress(),merchantDto.getEmailAddress());
+        Assert.assertEquals(merchant.getIdentificationNumber(),merchantDto.getIdentificationNumber());
+        Assert.assertEquals(merchant.getLicenseNumber(),merchantDto.getLicenseNumber());
+    }
 }

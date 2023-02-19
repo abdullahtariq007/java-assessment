@@ -1,5 +1,6 @@
 package company.tap.java.assessment.mapper;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import company.tap.java.assessment.dto.MerchantDto;
 import company.tap.java.assessment.model.Merchant;
@@ -13,6 +14,7 @@ public class MerchantMapper {
     public MerchantDto convertToDto(Merchant merchantEntity)
     {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         String merchantString = objectMapper.writeValueAsString(merchantEntity);
         return objectMapper.readValue(merchantString,MerchantDto.class);
     }
