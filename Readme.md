@@ -23,3 +23,5 @@ To run the application, you can use the following command:
 This will start the application and make it available at http://localhost:8080
 
 Don't forget to update mongodb credentials in **application.properties** file
+
+See the swagger api documentation here: http://localhost:8080/swagger-ui/index.html
